@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bd_natationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Categori_Compet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Niveau" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Categorie_Nageur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Competition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Distance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id_Categori_Compet" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Nageur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Genre" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="Adresse_Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Categorie_Nageur" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Resultat">
+          <Key>
+            <PropertyRef Name="Id_competition" />
+            <PropertyRef Name="Id_Nageur" />
+          </Key>
+          <Property Name="Id_competition" Type="int" Nullable="false" />
+          <Property Name="Id_Nageur" Type="int" Nullable="false" />
+          <Property Name="Position" Type="int" />
+        </EntityType>
+        <Association Name="FK_categori_competition">
+          <End Role="tbl_Categori_Compet" Type="Self.tbl_Categori_Compet" Multiplicity="1" />
+          <End Role="tbl_Competition" Type="Self.tbl_Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categori_Compet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Competition">
+              <PropertyRef Name="Id_Categori_Compet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_categori_nageur">
+          <End Role="tbl_Categorie_Nageur" Type="Self.tbl_Categorie_Nageur" Multiplicity="0..1" />
+          <End Role="tbl_Nageur" Type="Self.tbl_Nageur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categorie_Nageur">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Nageur">
+              <PropertyRef Name="Id_Categorie_Nageur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nageur">
+          <End Role="tbl_Nageur" Type="Self.tbl_Nageur" Multiplicity="1" />
+          <End Role="tbl_Resultat" Type="Self.tbl_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Nageur">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Resultat">
+              <PropertyRef Name="Id_Nageur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resultat">
+          <End Role="tbl_Competition" Type="Self.tbl_Competition" Multiplicity="1" />
+          <End Role="tbl_Resultat" Type="Self.tbl_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Competition">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Resultat">
+              <PropertyRef Name="Id_competition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_natationModelStoreContainer">
+          <EntitySet Name="tbl_Categori_Compet" EntityType="Self.tbl_Categori_Compet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Categorie_Nageur" EntityType="Self.tbl_Categorie_Nageur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Competition" EntityType="Self.tbl_Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Nageur" EntityType="Self.tbl_Nageur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Resultat" EntityType="Self.tbl_Resultat" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_categori_competition" Association="Self.FK_categori_competition">
+            <End Role="tbl_Categori_Compet" EntitySet="tbl_Categori_Compet" />
+            <End Role="tbl_Competition" EntitySet="tbl_Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_categori_nageur" Association="Self.FK_categori_nageur">
+            <End Role="tbl_Categorie_Nageur" EntitySet="tbl_Categorie_Nageur" />
+            <End Role="tbl_Nageur" EntitySet="tbl_Nageur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nageur" Association="Self.FK_nageur">
+            <End Role="tbl_Nageur" EntitySet="tbl_Nageur" />
+            <End Role="tbl_Resultat" EntitySet="tbl_Resultat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resultat" Association="Self.FK_resultat">
+            <End Role="tbl_Competition" EntitySet="tbl_Competition" />
+            <End Role="tbl_Resultat" EntitySet="tbl_Resultat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_natationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Categori_Compet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Niveau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Competition" Relationship="Self.FK_categori_competition" FromRole="tbl_Categori_Compet" ToRole="tbl_Competition" />
+        </EntityType>
+        <EntityType Name="tbl_Categorie_Nageur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tbl_Nageur" Relationship="Self.FK_categori_nageur" FromRole="tbl_Categorie_Nageur" ToRole="tbl_Nageur" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Competition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Distance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id_Categori_Compet" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Categori_Compet" Relationship="Self.FK_categori_competition" FromRole="tbl_Competition" ToRole="tbl_Categori_Compet" />
+          <NavigationProperty Name="tbl_Resultat" Relationship="Self.FK_resultat" FromRole="tbl_Competition" ToRole="tbl_Resultat" />
+        </EntityType>
+        <EntityType Name="tbl_Nageur">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Adresse_Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Categorie_Nageur" Type="Int32" />
+          <NavigationProperty Name="tbl_Categorie_Nageur" Relationship="Self.FK_categori_nageur" FromRole="tbl_Nageur" ToRole="tbl_Categorie_Nageur" />
+          <NavigationProperty Name="tbl_Resultat" Relationship="Self.FK_nageur" FromRole="tbl_Nageur" ToRole="tbl_Resultat" />
+        </EntityType>
+        <EntityType Name="tbl_Resultat">
+          <Key>
+            <PropertyRef Name="Id_competition" />
+            <PropertyRef Name="Id_Nageur" />
+          </Key>
+          <Property Name="Id_competition" Type="Int32" Nullable="false" />
+          <Property Name="Id_Nageur" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" />
+          <NavigationProperty Name="tbl_Competition" Relationship="Self.FK_resultat" FromRole="tbl_Resultat" ToRole="tbl_Competition" />
+          <NavigationProperty Name="tbl_Nageur" Relationship="Self.FK_nageur" FromRole="tbl_Resultat" ToRole="tbl_Nageur" />
+        </EntityType>
+        <Association Name="FK_categori_competition">
+          <End Role="tbl_Categori_Compet" Type="Self.tbl_Categori_Compet" Multiplicity="1" />
+          <End Role="tbl_Competition" Type="Self.tbl_Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categori_Compet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Competition">
+              <PropertyRef Name="Id_Categori_Compet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_categori_nageur">
+          <End Role="tbl_Categorie_Nageur" Type="Self.tbl_Categorie_Nageur" Multiplicity="0..1" />
+          <End Role="tbl_Nageur" Type="Self.tbl_Nageur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Categorie_Nageur">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Nageur">
+              <PropertyRef Name="Id_Categorie_Nageur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resultat">
+          <End Role="tbl_Competition" Type="Self.tbl_Competition" Multiplicity="1" />
+          <End Role="tbl_Resultat" Type="Self.tbl_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Competition">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Resultat">
+              <PropertyRef Name="Id_competition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_nageur">
+          <End Role="tbl_Nageur" Type="Self.tbl_Nageur" Multiplicity="1" />
+          <End Role="tbl_Resultat" Type="Self.tbl_Resultat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Nageur">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Resultat">
+              <PropertyRef Name="Id_Nageur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_natationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Categori_Compet" EntityType="Self.tbl_Categori_Compet" />
+          <EntitySet Name="tbl_Categorie_Nageur" EntityType="Self.tbl_Categorie_Nageur" />
+          <EntitySet Name="tbl_Competition" EntityType="Self.tbl_Competition" />
+          <EntitySet Name="tbl_Nageur" EntityType="Self.tbl_Nageur" />
+          <EntitySet Name="tbl_Resultat" EntityType="Self.tbl_Resultat" />
+          <AssociationSet Name="FK_categori_competition" Association="Self.FK_categori_competition">
+            <End Role="tbl_Categori_Compet" EntitySet="tbl_Categori_Compet" />
+            <End Role="tbl_Competition" EntitySet="tbl_Competition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_categori_nageur" Association="Self.FK_categori_nageur">
+            <End Role="tbl_Categorie_Nageur" EntitySet="tbl_Categorie_Nageur" />
+            <End Role="tbl_Nageur" EntitySet="tbl_Nageur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resultat" Association="Self.FK_resultat">
+            <End Role="tbl_Competition" EntitySet="tbl_Competition" />
+            <End Role="tbl_Resultat" EntitySet="tbl_Resultat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_nageur" Association="Self.FK_nageur">
+            <End Role="tbl_Nageur" EntitySet="tbl_Nageur" />
+            <End Role="tbl_Resultat" EntitySet="tbl_Resultat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_natationModelStoreContainer" CdmEntityContainer="bd_natationEntities">
+          <EntitySetMapping Name="tbl_Categori_Compet">
+            <EntityTypeMapping TypeName="bd_natationModel.tbl_Categori_Compet">
+              <MappingFragment StoreEntitySet="tbl_Categori_Compet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Niveau" ColumnName="Niveau" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Categorie_Nageur">
+            <EntityTypeMapping TypeName="bd_natationModel.tbl_Categorie_Nageur">
+              <MappingFragment StoreEntitySet="tbl_Categorie_Nageur">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Competition">
+            <EntityTypeMapping TypeName="bd_natationModel.tbl_Competition">
+              <MappingFragment StoreEntitySet="tbl_Competition">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Id_Categori_Compet" ColumnName="Id_Categori_Compet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Nageur">
+            <EntityTypeMapping TypeName="bd_natationModel.tbl_Nageur">
+              <MappingFragment StoreEntitySet="tbl_Nageur">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Adresse_Email" ColumnName="Adresse_Email" />
+                <ScalarProperty Name="Id_Categorie_Nageur" ColumnName="Id_Categorie_Nageur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Resultat">
+            <EntityTypeMapping TypeName="bd_natationModel.tbl_Resultat">
+              <MappingFragment StoreEntitySet="tbl_Resultat">
+                <ScalarProperty Name="Id_competition" ColumnName="Id_competition" />
+                <ScalarProperty Name="Id_Nageur" ColumnName="Id_Nageur" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

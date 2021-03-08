@@ -16,5 +16,31 @@ namespace TravailBDPart4
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void showForm(Form frm)
+        {
+            this.IsMdiContainer = true;
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void ajoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(new Ajout());
+        }
+
+        private void modificationDestructionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(new ModificationDestruction());
+        }
+
+        private void afficherCompetitionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(new AfficherCompeNageur());
+        }
     }
 }
