@@ -45,21 +45,21 @@ namespace TravailBDPart4
             // 
             // txtNom
             // 
-            this.txtNom.Location = new System.Drawing.Point(107, 62);
+            this.txtNom.Location = new System.Drawing.Point(183, 66);
             this.txtNom.Name = "txtNom";
             this.txtNom.Size = new System.Drawing.Size(100, 20);
             this.txtNom.TabIndex = 0;
             // 
             // txtCouriel
             // 
-            this.txtCouriel.Location = new System.Drawing.Point(107, 184);
+            this.txtCouriel.Location = new System.Drawing.Point(183, 188);
             this.txtCouriel.Name = "txtCouriel";
             this.txtCouriel.Size = new System.Drawing.Size(100, 20);
             this.txtCouriel.TabIndex = 1;
             // 
             // txtPrenom
             // 
-            this.txtPrenom.Location = new System.Drawing.Point(107, 102);
+            this.txtPrenom.Location = new System.Drawing.Point(183, 106);
             this.txtPrenom.Name = "txtPrenom";
             this.txtPrenom.Size = new System.Drawing.Size(100, 20);
             this.txtPrenom.TabIndex = 3;
@@ -67,7 +67,7 @@ namespace TravailBDPart4
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 65);
+            this.label1.Location = new System.Drawing.Point(120, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 4;
@@ -76,7 +76,7 @@ namespace TravailBDPart4
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 187);
+            this.label2.Location = new System.Drawing.Point(120, 191);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 5;
@@ -85,7 +85,7 @@ namespace TravailBDPart4
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 145);
+            this.label3.Location = new System.Drawing.Point(120, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 6;
@@ -94,7 +94,7 @@ namespace TravailBDPart4
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 105);
+            this.label4.Location = new System.Drawing.Point(120, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 7;
@@ -103,7 +103,7 @@ namespace TravailBDPart4
             // cbCat
             // 
             this.cbCat.FormattingEnabled = true;
-            this.cbCat.Location = new System.Drawing.Point(107, 230);
+            this.cbCat.Location = new System.Drawing.Point(183, 234);
             this.cbCat.Name = "cbCat";
             this.cbCat.Size = new System.Drawing.Size(100, 21);
             this.cbCat.TabIndex = 8;
@@ -111,7 +111,7 @@ namespace TravailBDPart4
             // 
             // btnAjout
             // 
-            this.btnAjout.Location = new System.Drawing.Point(107, 290);
+            this.btnAjout.Location = new System.Drawing.Point(183, 294);
             this.btnAjout.Name = "btnAjout";
             this.btnAjout.Size = new System.Drawing.Size(85, 29);
             this.btnAjout.TabIndex = 10;
@@ -122,7 +122,7 @@ namespace TravailBDPart4
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(44, 233);
+            this.label5.Location = new System.Drawing.Point(120, 237);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(26, 13);
             this.label5.TabIndex = 11;
@@ -131,7 +131,7 @@ namespace TravailBDPart4
             // checkH
             // 
             this.checkH.AutoSize = true;
-            this.checkH.Location = new System.Drawing.Point(116, 145);
+            this.checkH.Location = new System.Drawing.Point(192, 149);
             this.checkH.Name = "checkH";
             this.checkH.Size = new System.Drawing.Size(62, 17);
             this.checkH.TabIndex = 12;
@@ -141,7 +141,7 @@ namespace TravailBDPart4
             // checkF
             // 
             this.checkF.AutoSize = true;
-            this.checkF.Location = new System.Drawing.Point(184, 145);
+            this.checkF.Location = new System.Drawing.Point(260, 149);
             this.checkF.Name = "checkF";
             this.checkF.Size = new System.Drawing.Size(60, 17);
             this.checkF.TabIndex = 13;
@@ -152,7 +152,7 @@ namespace TravailBDPart4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(429, 450);
             this.Controls.Add(this.checkF);
             this.Controls.Add(this.checkH);
             this.Controls.Add(this.label5);

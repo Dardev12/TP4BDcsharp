@@ -54,5 +54,15 @@ namespace TravailBDPart4
             //}
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDetruire_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
