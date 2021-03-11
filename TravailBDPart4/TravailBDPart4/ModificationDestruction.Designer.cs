@@ -42,14 +42,14 @@ namespace TravailBDPart4
             this.txtCouriel = new System.Windows.Forms.TextBox();
             this.txtNom = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnDetruire = new System.Windows.Forms.Button();
             this.txtIdNageur = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnDetruire = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dgvNageur = new System.Windows.Forms.DataGridView();
             this.txtSearchNageur = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNageur)).BeginInit();
             this.SuspendLayout();
             // 
             // checkF
@@ -89,6 +89,7 @@ namespace TravailBDPart4
             this.btnModif.TabIndex = 22;
             this.btnModif.Text = "Modifier";
             this.btnModif.UseVisualStyleBackColor = true;
+            this.btnModif.Click += new System.EventHandler(this.btnModif_Click);
             // 
             // cbCat
             // 
@@ -180,14 +181,12 @@ namespace TravailBDPart4
             this.groupBox1.Text = "Modification";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label6
+            // txtIdNageur
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 53);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "ID Nageur";
+            this.txtIdNageur.Location = new System.Drawing.Point(112, 50);
+            this.txtIdNageur.Name = "txtIdNageur";
+            this.txtIdNageur.Size = new System.Drawing.Size(100, 20);
+            this.txtIdNageur.TabIndex = 29;
             // 
             // btnDetruire
             // 
@@ -199,20 +198,22 @@ namespace TravailBDPart4
             this.btnDetruire.UseVisualStyleBackColor = true;
             this.btnDetruire.Click += new System.EventHandler(this.btnDetruire_Click);
             // 
-            // txtIdNageur
+            // label6
             // 
-            this.txtIdNageur.Location = new System.Drawing.Point(112, 50);
-            this.txtIdNageur.Name = "txtIdNageur";
-            this.txtIdNageur.Size = new System.Drawing.Size(100, 20);
-            this.txtIdNageur.TabIndex = 29;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(50, 53);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "ID Nageur";
             // 
-            // dataGridView1
+            // dgvNageur
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 112);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(373, 304);
-            this.dataGridView1.TabIndex = 30;
+            this.dgvNageur.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNageur.Location = new System.Drawing.Point(12, 112);
+            this.dgvNageur.Name = "dgvNageur";
+            this.dgvNageur.Size = new System.Drawing.Size(373, 304);
+            this.dgvNageur.TabIndex = 30;
             // 
             // txtSearchNageur
             // 
@@ -220,6 +221,7 @@ namespace TravailBDPart4
             this.txtSearchNageur.Name = "txtSearchNageur";
             this.txtSearchNageur.Size = new System.Drawing.Size(171, 20);
             this.txtSearchNageur.TabIndex = 31;
+            this.txtSearchNageur.TextChanged += new System.EventHandler(this.txtSearchNageur_TextChanged);
             // 
             // label7
             // 
@@ -237,13 +239,14 @@ namespace TravailBDPart4
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtSearchNageur);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvNageur);
             this.Controls.Add(this.groupBox1);
             this.Name = "ModificationDestruction";
             this.Text = "ModificationDestruction";
+            this.Load += new System.EventHandler(this.ModificationDestruction_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNageur)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,7 +270,7 @@ namespace TravailBDPart4
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnDetruire;
         private System.Windows.Forms.TextBox txtIdNageur;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvNageur;
         private System.Windows.Forms.TextBox txtSearchNageur;
         private System.Windows.Forms.Label label7;
     }

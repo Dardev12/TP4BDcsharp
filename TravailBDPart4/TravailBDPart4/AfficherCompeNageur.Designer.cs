@@ -120,6 +120,7 @@ namespace TravailBDPart4
             this.Controls.Add(this.txtNom);
             this.Name = "AfficherCompeNageur";
             this.Text = "AfficherCompeNageur";
+            this.Load += new System.EventHandler(this.AfficherCompeNageur_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

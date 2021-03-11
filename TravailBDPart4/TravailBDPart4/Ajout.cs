@@ -29,16 +29,26 @@ namespace TravailBDPart4
                 nageur = new tbl_Nageur();
                 nageur.Nom = txtNom.Text;
                 nageur.Prenom = txtPrenom.Text;
-                if (checkH.Checked == true && checkF.Checked ==false)
+                try
                 {
-                    nageur.Genre = "M";
+                    if (checkH.Checked == true && checkF.Checked == false)
+                    {
+                        nageur.Genre = "M";
+                    }
+                    if (checkH.Checked == false && checkF.Checked == true)
+                    {
+                        nageur.Genre = "F";
+                    }
                 }
-                if (checkH.Checked == false && checkF.Checked == true)
+                catch (Exception e)
                 {
-                    nageur.Genre = "F";
+                    MessageBox.Show(e.Message + " une erreur c'est produite lors de la selection du genre! Veuillez selectionner un genre!");
+                    
                 }
+                
+                
                 nageur.Adresse_Email = txtCouriel.Text;
-                nageur.Id_Categorie_Nageur = findID();
+                nageur.Id_Categorie_Nageur = findIDCategorieNageur();
                 context.tbl_Nageur.Add(nageur);
                 if (context.tbl_Nageur.Any(n => n.Adresse_Email == nageur.Adresse_Email))
                 {
@@ -65,9 +75,7 @@ namespace TravailBDPart4
             using (var context = new bd_natationEntities())
             {
                 cbCat.DisplayMember = "Age";
-                //cbIdCat.DisplayMember = "ID";
                 cbCat.ValueMember = "ID";
-                //cbIdCat.DataSource = context.tbl_Categorie_Nageur.ToList();
                 cbCat.DataSource = context.tbl_Categorie_Nageur.ToList();
             }
             
@@ -92,7 +100,7 @@ namespace TravailBDPart4
         {
             AfficheCate();
         }
-        private int findID()
+        private int findIDCategorieNageur()
         {
             using (var context = new bd_natationEntities())
             {
