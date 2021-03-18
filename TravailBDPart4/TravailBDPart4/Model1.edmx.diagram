@@ -7,7 +7,7 @@
       <Diagram DiagramId="197981d82d304dd3aaa0ff0e9618441a" Name="Diagram1">
         <EntityTypeShape EntityType="bd_natationModel.tbl_Categori_Compet" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_natationModel.tbl_Categorie_Nageur" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="bd_natationModel.tbl_Competition" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_natationModel.tbl_Competition" Width="1.5" PointX="3.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_natationModel.tbl_Nageur" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="bd_natationModel.tbl_Resultat" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="bd_natationModel.FK_categori_competition" ManuallyRouted="false" />

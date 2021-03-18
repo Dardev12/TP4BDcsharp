@@ -14,40 +14,19 @@ namespace TravailBDPart4
 {
     public partial class ModificationDestruction : Form
     {
-        //public Nageur = new ;
         public ModificationDestruction()
         {
             InitializeComponent();
         }
-
-        public void Modifier()
-        {
-            //using (var context = new Lt_scolaireEntities())
-            //{
-            //    context.tbl_cours.Attach(cours);
-            //    cours.no_cours = txtNocours.Text;
-            //    cours.nom_cours = txtnomCours.Text;
-            //    cours.pond = txtPonderation.Text;
-            //    try
-            //    {
-            //        context.SaveChanges();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message.ToString());
-            //    }
-            //}
-
-        }
+        
         public void Detruire()
         {
             using (var context = new bd_natationEntities())
             {
                 
                 try
-                {
-                    tbl_Nageur nageurEffacer = QueryEffacer();
-                    context.SaveChanges();
+                 {
+                    QueryEffacer();
                     MessageBox.Show("Destruction réalisée avec succès");
                 }
                 catch (Exception ex)
@@ -57,22 +36,21 @@ namespace TravailBDPart4
             }
         }
 
-        public tbl_Nageur QueryEffacer()
+        public void QueryEffacer()
         {
             var id = txtIdNageur.Text;
-            tbl_Nageur nageur = new tbl_Nageur();
             if (id!="")
             {
                 using (var context = new bd_natationEntities())
                 {
-                    nageur = context.tbl_Nageur.SqlQuery("DELETE FROM tbl_Nageur WHERE ID = @id", new SqlParameter("@id", id)).FirstOrDefault();
-                    return nageur;
+                    tbl_Nageur nageur = context.tbl_Nageur.SqlQuery("Select * FROM tbl_Nageur WHERE ID = @ID", new SqlParameter("ID", id)).FirstOrDefault();
+                    context.tbl_Nageur.Remove(nageur);
+                    context.SaveChanges();
                 }
             }
             else
             {
                 MessageBox.Show("Veuillez rensigner l'ID du nageur!");
-                return nageur;
             }
         }
 
@@ -188,6 +166,18 @@ namespace TravailBDPart4
         private void txtSearchNageur_TextChanged(object sender, EventArgs e)
         {
             AfficherNageur();
+        }
+
+        private void dgvNageur_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvNageur_Click(object sender, EventArgs e)
+        {
+            txtIdNageur.Text = dgvNageur[0, dgvNageur.CurrentRow.Index].Value.ToString();
+            txtNom.Text = dgvNageur[1, dgvNageur.CurrentRow.Index].Value.ToString();
+            txtPrenom.Text = dgvNageur[2, dgvNageur.CurrentRow.Index].Value.ToString();
         }
     }
 }

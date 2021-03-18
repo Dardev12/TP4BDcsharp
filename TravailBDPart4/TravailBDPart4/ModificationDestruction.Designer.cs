@@ -214,6 +214,8 @@ namespace TravailBDPart4
             this.dgvNageur.Name = "dgvNageur";
             this.dgvNageur.Size = new System.Drawing.Size(373, 304);
             this.dgvNageur.TabIndex = 30;
+            this.dgvNageur.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNageur_CellContentClick);
+            this.dgvNageur.Click += new System.EventHandler(this.dgvNageur_Click);
             // 
             // txtSearchNageur
             // 
