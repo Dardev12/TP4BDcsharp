@@ -42,5 +42,15 @@ namespace TravailBDPart4
         {
             showForm(new AfficherCompeNageur());
         }
+
+        private void ajouterResultatCompetitionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(new frmAjoutResultats());
+        }
+
+        private void desinscrireCoureurTouteCompetitionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(new frmDesinscription());
+        }
     }
 }

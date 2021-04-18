@@ -21,7 +21,7 @@ namespace TravailBDPart4
         
         public void Detruire()
         {
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 
                 try
@@ -41,9 +41,9 @@ namespace TravailBDPart4
             var id = txtIdNageur.Text;
             if (id!="")
             {
-                using (var context = new bd_natationEntities())
+                using (var context = new bd_natationEntities1())
                 {
-                    tbl_Nageur nageur = context.tbl_Nageur.SqlQuery("Select * FROM tbl_Nageur WHERE ID = @ID", new SqlParameter("ID", id)).FirstOrDefault();
+                    tbl_Nageur nageur = context.tbl_Nageur.SqlQuery("Select * FROM tbl_Nageur WHERE id_nageur = @ID", new SqlParameter("ID", id)).FirstOrDefault();
                     context.tbl_Nageur.Remove(nageur);
                     context.SaveChanges();
                 }
@@ -72,7 +72,7 @@ namespace TravailBDPart4
 
         public void AfficheCate()
         {
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 cbCat.DisplayMember = "Age";
                 cbCat.ValueMember = "ID";
@@ -84,7 +84,7 @@ namespace TravailBDPart4
         private void btnModif_Click(object sender, EventArgs e)
         {
             tbl_Nageur nageurModif = ModifNageur();
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 context.tbl_Nageur.Attach(nageurModif);
                 nageurModif.Nom = txtNom.Text;
@@ -130,15 +130,15 @@ namespace TravailBDPart4
         private tbl_Nageur ModifNageur()
         {
             var id = txtIdNageur.Text;
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
-                tbl_Nageur nageur = context.tbl_Nageur.SqlQuery("SELECT * FROM tbl_Nageur WHERE ID = @id", new SqlParameter("@id",id)).FirstOrDefault();
+                tbl_Nageur nageur = context.tbl_Nageur.SqlQuery("SELECT * FROM tbl_Nageur WHERE id_nageur = @id", new SqlParameter("@id",id)).FirstOrDefault();
                 return nageur;
             }
         }
         private int findIDCategorieNageur()
         {
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 tbl_Categorie_Nageur cat = context.tbl_Categorie_Nageur.SqlQuery("SELECT ID, Age FROM tbl_Categorie_Nageur WHERE ID = @id", new SqlParameter("@id", cbCat.SelectedValue)).FirstOrDefault();
                 return cat.ID;
@@ -152,13 +152,13 @@ namespace TravailBDPart4
             dgvNageur.Columns[1].Name = "Nom";
             dgvNageur.Columns[2].Name = "Prenom";
 
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 List<tbl_Nageur> list = new List<tbl_Nageur>();
-                list = context.tbl_Nageur.SqlQuery("SELECT * FROM tbl_Nageur WHERE nom = @nom", new SqlParameter("nom", txtSearchNageur.Text)).ToList();
+                list = context.tbl_Nageur.SqlQuery("SELECT * FROM tbl_Nageur WHERE nom LIKE '"+txtSearchNageur.Text+"%'").ToList();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    dgvNageur.Rows.Add(list[i].ID , list[i].Nom , list[i].Prenom);
+                    dgvNageur.Rows.Add(list[i].id_nageur , list[i].Nom , list[i].Prenom);
                 }
             }
         }

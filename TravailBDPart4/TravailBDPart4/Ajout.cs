@@ -23,7 +23,7 @@ namespace TravailBDPart4
 
         public void Ajoute()
         {
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 
                 nageur = new tbl_Nageur();
@@ -72,7 +72,7 @@ namespace TravailBDPart4
 
         public void AfficheCate()
         {
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 cbCat.DisplayMember = "Age";
                 cbCat.ValueMember = "ID";
@@ -102,7 +102,7 @@ namespace TravailBDPart4
         }
         private int findIDCategorieNageur()
         {
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 tbl_Categorie_Nageur cat = context.tbl_Categorie_Nageur.SqlQuery("SELECT ID, Age FROM tbl_Categorie_Nageur WHERE ID = @id", new SqlParameter("@id", cbCat.SelectedValue)).FirstOrDefault();
                 return cat.ID;

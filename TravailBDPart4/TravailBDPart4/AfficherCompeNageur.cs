@@ -18,20 +18,6 @@ namespace TravailBDPart4
             InitializeComponent();
         }
 
-        public void Afficher()
-        {
-            using (var context = new bd_natationEntities())
-            {
-                dgvCompe.Columns[0].Name = "Id";
-                dgvCompe.Columns[1].Name = "Nom";
-                dgvCompe.Columns[2].Name = "Prenom";
-                dgvCompe.Columns[3].Name = "Adresse Email";
-                dgvCompe.Columns[4].Name = "ID Categorie";
-                dgvCompe.DataSource = context.tbl_Nageur.ToList();
-            }
-                
-        }
-
         private void AfficherCompeNageur_Load(object sender, EventArgs e)
         {
             dgvCompe.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -41,15 +27,15 @@ namespace TravailBDPart4
         {
             dgvCompe.Rows.Clear();
 
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 List<tbl_Competition> list = new List<tbl_Competition>();
 
                 list = context.tbl_Competition.SqlQuery("select tbl_Competition.Nom, tbl_Competition.Description " +
                     "from tbl_Nageur " +
-                    "inner join tbl_Resultat on tbl_Nageur.ID = tbl_Resultat.Id_Nageur " +
+                    "inner join tbl_Resultat on tbl_Nageur.id_nageur = tbl_Resultat.Id_Nageur " +
                     "inner join tbl_Competition on tbl_Resultat.Id_competition = tbl_Competition.ID " +
-                    "where tbl_Nageur.ID = @ID", new SqlParameter("ID", txtIdNageur.Text)).ToList();
+                    "where tbl_Nageur.id_nageur = @ID", new SqlParameter("ID", txtIdNageur.Text)).ToList();
                 dgvCompe.DataSource = list;
 
                 dgvCompe.Columns["tbl_Resultat"].Visible = false;
@@ -74,13 +60,13 @@ namespace TravailBDPart4
             dgvNageur.Columns[1].Name = "Nom";
             dgvNageur.Columns[2].Name = "Prenom";
 
-            using (var context = new bd_natationEntities())
+            using (var context = new bd_natationEntities1())
             {
                 List<tbl_Nageur> list = new List<tbl_Nageur>();
                 list = context.tbl_Nageur.SqlQuery("SELECT * FROM tbl_Nageur WHERE nom = @nom", new SqlParameter("nom", txtSearchNageur.Text)).ToList();
                 for (int i = 0; i < list.Count; i++)
                 {
-                    dgvNageur.Rows.Add(list[i].ID, list[i].Nom, list[i].Prenom);
+                    dgvNageur.Rows.Add(list[i].id_nageur, list[i].Nom, list[i].Prenom);
                 }
             }
         }

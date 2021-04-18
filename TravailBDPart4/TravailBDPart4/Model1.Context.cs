@@ -12,11 +12,13 @@ namespace TravailBDPart4
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class bd_natationEntities : DbContext
+    public partial class bd_natationEntities1 : DbContext
     {
-        public bd_natationEntities()
-            : base("name=bd_natationEntities")
+        public bd_natationEntities1()
+            : base("name=bd_natationEntities1")
         {
         }
     
@@ -30,5 +32,23 @@ namespace TravailBDPart4
         public virtual DbSet<tbl_Competition> tbl_Competition { get; set; }
         public virtual DbSet<tbl_Nageur> tbl_Nageur { get; set; }
         public virtual DbSet<tbl_Resultat> tbl_Resultat { get; set; }
+        public virtual DbSet<vueNageurCompe> vueNageurCompes { get; set; }
+    
+        public virtual int updateView(Nullable<int> id_compe, Nullable<int> id_nageur, Nullable<int> position)
+        {
+            var id_compeParameter = id_compe.HasValue ?
+                new ObjectParameter("id_compe", id_compe) :
+                new ObjectParameter("id_compe", typeof(int));
+    
+            var id_nageurParameter = id_nageur.HasValue ?
+                new ObjectParameter("id_nageur", id_nageur) :
+                new ObjectParameter("id_nageur", typeof(int));
+    
+            var positionParameter = position.HasValue ?
+                new ObjectParameter("position", position) :
+                new ObjectParameter("position", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateView", id_compeParameter, id_nageurParameter, positionParameter);
+        }
     }
 }

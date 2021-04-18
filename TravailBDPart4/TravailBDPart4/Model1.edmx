@@ -31,9 +31,9 @@
         </EntityType>
         <EntityType Name="tbl_Nageur">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="id_nageur" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_nageur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nom" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Prenom" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Genre" Type="nchar" MaxLength="1" Nullable="false" />
@@ -48,6 +48,21 @@
           <Property Name="Id_competition" Type="int" Nullable="false" />
           <Property Name="Id_Nageur" Type="int" Nullable="false" />
           <Property Name="Position" Type="int" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vueNageurCompe">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="id_nageur" />
+            <PropertyRef Name="nom" />
+            <PropertyRef Name="prenom" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="id_nageur" Type="int" Nullable="false" />
+          <Property Name="nom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="prenom" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="position" Type="int" />
         </EntityType>
         <Association Name="FK_categori_competition">
           <End Role="tbl_Categori_Compet" Type="Self.tbl_Categori_Compet" Multiplicity="1" />
@@ -78,7 +93,7 @@
           <End Role="tbl_Resultat" Type="Self.tbl_Resultat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_Nageur">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="id_nageur" />
             </Principal>
             <Dependent Role="tbl_Resultat">
               <PropertyRef Name="Id_Nageur" />
@@ -97,12 +112,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="updateView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_compe" Type="int" Mode="In" />
+          <Parameter Name="id_nageur" Type="int" Mode="In" />
+          <Parameter Name="position" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="bd_natationModelStoreContainer">
           <EntitySet Name="tbl_Categori_Compet" EntityType="Self.tbl_Categori_Compet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Categorie_Nageur" EntityType="Self.tbl_Categorie_Nageur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Competition" EntityType="Self.tbl_Competition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Nageur" EntityType="Self.tbl_Nageur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Resultat" EntityType="Self.tbl_Resultat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vueNageurCompe" EntityType="Self.vueNageurCompe" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vueNageurCompe].[ID] AS [ID], 
+    [vueNageurCompe].[id_nageur] AS [id_nageur], 
+    [vueNageurCompe].[nom] AS [nom], 
+    [vueNageurCompe].[prenom] AS [prenom], 
+    [vueNageurCompe].[position] AS [position]
+    FROM [dbo].[vueNageurCompe] AS [vueNageurCompe]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_categori_competition" Association="Self.FK_categori_competition">
             <End Role="tbl_Categori_Compet" EntitySet="tbl_Categori_Compet" />
             <End Role="tbl_Competition" EntitySet="tbl_Competition" />
@@ -137,8 +166,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Age" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tbl_Nageur" Relationship="Self.FK_categori_nageur" FromRole="tbl_Categorie_Nageur" ToRole="tbl_Nageur" />
-          <Property Name="Age" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_Competition">
           <Key>
@@ -154,9 +183,9 @@
         </EntityType>
         <EntityType Name="tbl_Nageur">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="id_nageur" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_nageur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Genre" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
@@ -175,6 +204,19 @@
           <Property Name="Position" Type="Int32" />
           <NavigationProperty Name="tbl_Competition" Relationship="Self.FK_resultat" FromRole="tbl_Resultat" ToRole="tbl_Competition" />
           <NavigationProperty Name="tbl_Nageur" Relationship="Self.FK_nageur" FromRole="tbl_Resultat" ToRole="tbl_Nageur" />
+        </EntityType>
+        <EntityType Name="vueNageurCompe">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="id_nageur" />
+            <PropertyRef Name="nom" />
+            <PropertyRef Name="prenom" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="id_nageur" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="position" Type="Int32" />
         </EntityType>
         <Association Name="FK_categori_competition">
           <End Role="tbl_Categori_Compet" Type="Self.tbl_Categori_Compet" Multiplicity="1" />
@@ -217,19 +259,20 @@
           <End Role="tbl_Resultat" Type="Self.tbl_Resultat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_Nageur">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="id_nageur" />
             </Principal>
             <Dependent Role="tbl_Resultat">
               <PropertyRef Name="Id_Nageur" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bd_natationEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="bd_natationEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_Categori_Compet" EntityType="Self.tbl_Categori_Compet" />
           <EntitySet Name="tbl_Categorie_Nageur" EntityType="Self.tbl_Categorie_Nageur" />
           <EntitySet Name="tbl_Competition" EntityType="Self.tbl_Competition" />
           <EntitySet Name="tbl_Nageur" EntityType="Self.tbl_Nageur" />
           <EntitySet Name="tbl_Resultat" EntityType="Self.tbl_Resultat" />
+          <EntitySet Name="vueNageurCompes" EntityType="Self.vueNageurCompe" />
           <AssociationSet Name="FK_categori_competition" Association="Self.FK_categori_competition">
             <End Role="tbl_Categori_Compet" EntitySet="tbl_Categori_Compet" />
             <End Role="tbl_Competition" EntitySet="tbl_Competition" />
@@ -246,13 +289,18 @@
             <End Role="tbl_Nageur" EntitySet="tbl_Nageur" />
             <End Role="tbl_Resultat" EntitySet="tbl_Resultat" />
           </AssociationSet>
+          <FunctionImport Name="updateView">
+            <Parameter Name="id_compe" Mode="In" Type="Int32" />
+            <Parameter Name="id_nageur" Mode="In" Type="Int32" />
+            <Parameter Name="position" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bd_natationModelStoreContainer" CdmEntityContainer="bd_natationEntities">
+        <EntityContainerMapping StorageEntityContainer="bd_natationModelStoreContainer" CdmEntityContainer="bd_natationEntities1">
           <EntitySetMapping Name="tbl_Categori_Compet">
             <EntityTypeMapping TypeName="bd_natationModel.tbl_Categori_Compet">
               <MappingFragment StoreEntitySet="tbl_Categori_Compet">
@@ -264,9 +312,9 @@
           <EntitySetMapping Name="tbl_Categorie_Nageur">
             <EntityTypeMapping TypeName="bd_natationModel.tbl_Categorie_Nageur">
               <MappingFragment StoreEntitySet="tbl_Categorie_Nageur">
-                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                </MappingFragment>
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_Competition">
@@ -283,7 +331,7 @@
           <EntitySetMapping Name="tbl_Nageur">
             <EntityTypeMapping TypeName="bd_natationModel.tbl_Nageur">
               <MappingFragment StoreEntitySet="tbl_Nageur">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="id_nageur" ColumnName="id_nageur" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
@@ -301,6 +349,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vueNageurCompes">
+            <EntityTypeMapping TypeName="bd_natationModel.vueNageurCompe">
+              <MappingFragment StoreEntitySet="vueNageurCompe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="id_nageur" ColumnName="id_nageur" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="position" ColumnName="position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="bd_natationModel.vueNageurCompe">
+              <ModificationFunctionMapping>
+                <UpdateFunction FunctionName="bd_natationModel.Store.updateView">
+                  <ScalarProperty Name="ID" ParameterName="id_compe" Version="Current" />
+                  <ScalarProperty Name="position" ParameterName="position" Version="Current" />
+                  <ScalarProperty Name="id_nageur" ParameterName="id_nageur" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="updateView" FunctionName="bd_natationModel.Store.updateView" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

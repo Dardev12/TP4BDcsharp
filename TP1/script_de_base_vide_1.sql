@@ -4,33 +4,33 @@
 
 
 /* PARTIE 2 */
-/* détruit la bd si elle existe */
+/* dÃ©truit la bd si elle existe */
 use master
 go
+
 IF  EXISTS (SELECT name FROM sys.databases 
 		    WHERE name = 'bd_natation')
   drop database bd_natation
 go
-/* création de votre bd et de vos tables */
+/* crÃ©ation de votre bd et de vos tables */
 
 create database bd_natation
-go
+go 
 
 use bd_natation
 go
 
 CREATE TABLE tbl_Categorie_Nageur(
     ID        INT IDENTITY (1,1) NOT NULL ,
-    Age_Min   INT  NOT NULL ,
-    Age_Max   INT  NOT NULL  ,
+    Age NVARCHAR(10) NOT NULL,
     CONSTRAINT Categorie_Nageur_PK PRIMARY KEY (ID),
-	CONSTRAINT UC UNIQUE (Age_Min, Age_Max)
+	CONSTRAINT UC UNIQUE (Age)
 )
 go
 /*Table des nageurs, avec cle etrangeres vers la table des categorie*/
 CREATE TABLE tbl_Nageur(
     ID                    INT IDENTITY (1,1) NOT NULL ,
-    Nom                   NVARCHAR (100) NULL , /* Test du champ Null qui doit être modifier en not null */
+    Nom                   NVARCHAR (100) NULL , /* Test du champ Null qui doit Ãªtre modifier en not null */
     Prenom                NVARCHAR (100) NOT NULL ,
     Genre                 NCHAR (1)  NOT NULL DEFAULT 'M',
     Adresse_Email         NVARCHAR (200) NOT NULL ,
@@ -81,9 +81,9 @@ ALTER TABLE tbl_Nageur ADD
 	(Id_Categorie_Nageur) REFERENCES tbl_Categorie_Nageur (ID) ON UPDATE CASCADE
 go
 
-/* toutes les contraintes sont définis dans le create de la table auncune contrainte après le create (dans le cas d'une table avec clé étrangère)*/
+/* toutes les contraintes sont dÃ©finis dans le create de la table auncune contrainte aprÃ¨s le create (dans le cas d'une table avec clÃ© Ã©trangÃ¨re)*/
 
-/* toutes les contraintes sont définis après la creation de la table (dans le cas d'une table avec clé étrangère)*/
+/* toutes les contraintes sont dÃ©finis aprÃ¨s la creation de la table (dans le cas d'une table avec clÃ© Ã©trangÃ¨re)*/
 
 /* contraintes */
 ALTER TABLE tbl_Nageur WITH NOCHECK 
@@ -105,11 +105,11 @@ alter column
 	Nom
 		NVARCHAR (100) NOT NULL;
 go
-/* contrainte pas 2 données pareilles */
+/* contrainte pas 2 donnÃ©es pareilles */
 
 
 /* PARTIE 3 */
-/* insertion de données en batch à partir de LT_classe*/
+/* insertion de donnÃ©es en batch Ã  partir de LT_classe*/
 Insert into tbl_Categori_Compet
 VALUES(
 	'Facile'
@@ -117,14 +117,13 @@ VALUES(
 GO
 Insert into tbl_Categorie_Nageur
 VALUES(
-	30,
-	35
+	'30-35'
 )
 GO
 Insert into tbl_Competition
 Values(
 	'Les Papa nageux',
-	'Cette course est destiné au Père de famille',
+	'Cette course est destinÃ© au PÃ¨re de famille',
 	10.2,
 	1
 )
@@ -147,7 +146,7 @@ VALUES(
 	NULL
 )
 GO
-/* insertion données spécifiques */
+/* insertion donnÃ©es spÃ©cifiques */
 insert into tbl_Nageur(Nom, Prenom, Genre, Adresse_Email)
 select nom, prenom, sexe, nom+prenom+'@gmail.com'
 from DBelection.dbo.elec2017
@@ -169,7 +168,7 @@ go
 
 		
 
-/* grand select pour démontrer ajouts imposés */
+/* grand select pour dÃ©montrer ajouts imposÃ©s */
 select * from tbl_Competition
 select * from tbl_Nageur
 select * from tbl_Resultat

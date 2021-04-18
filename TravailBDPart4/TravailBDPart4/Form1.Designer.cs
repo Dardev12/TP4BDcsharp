@@ -33,6 +33,8 @@ namespace TravailBDPart4
             this.ajoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificationDestructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afficherCompetitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajouterResultatCompetitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desinscrireCoureurTouteCompetitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +43,9 @@ namespace TravailBDPart4
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ajoutToolStripMenuItem,
             this.modificationDestructionToolStripMenuItem,
-            this.afficherCompetitionToolStripMenuItem});
+            this.afficherCompetitionToolStripMenuItem,
+            this.ajouterResultatCompetitionToolStripMenuItem,
+            this.desinscrireCoureurTouteCompetitionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(792, 24);
@@ -69,6 +73,20 @@ namespace TravailBDPart4
             this.afficherCompetitionToolStripMenuItem.Text = "AfficherCompetition";
             this.afficherCompetitionToolStripMenuItem.Click += new System.EventHandler(this.afficherCompetitionToolStripMenuItem_Click);
             // 
+            // ajouterResultatCompetitionToolStripMenuItem
+            // 
+            this.ajouterResultatCompetitionToolStripMenuItem.Name = "ajouterResultatCompetitionToolStripMenuItem";
+            this.ajouterResultatCompetitionToolStripMenuItem.Size = new System.Drawing.Size(168, 20);
+            this.ajouterResultatCompetitionToolStripMenuItem.Text = "Ajouter resultat competition";
+            this.ajouterResultatCompetitionToolStripMenuItem.Click += new System.EventHandler(this.ajouterResultatCompetitionToolStripMenuItem_Click);
+            // 
+            // desinscrireCoureurTouteCompetitionToolStripMenuItem
+            // 
+            this.desinscrireCoureurTouteCompetitionToolStripMenuItem.Name = "desinscrireCoureurTouteCompetitionToolStripMenuItem";
+            this.desinscrireCoureurTouteCompetitionToolStripMenuItem.Size = new System.Drawing.Size(218, 20);
+            this.desinscrireCoureurTouteCompetitionToolStripMenuItem.Text = "desinscrire coureur toute competition";
+            this.desinscrireCoureurTouteCompetitionToolStripMenuItem.Click += new System.EventHandler(this.desinscrireCoureurTouteCompetitionToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,6 +110,8 @@ namespace TravailBDPart4
         private System.Windows.Forms.ToolStripMenuItem ajoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificationDestructionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem afficherCompetitionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajouterResultatCompetitionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desinscrireCoureurTouteCompetitionToolStripMenuItem;
     }
 }
 

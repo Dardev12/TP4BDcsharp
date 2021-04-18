@@ -20,7 +20,7 @@ namespace TravailBDPart4
             this.tbl_Resultat = new HashSet<tbl_Resultat>();
         }
     
-        public int ID { get; set; }
+        public int id_nageur { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Genre { get; set; }
