@@ -53,6 +53,7 @@ namespace TravailBDPart4
             this.txtSearchNageur.Name = "txtSearchNageur";
             this.txtSearchNageur.Size = new System.Drawing.Size(227, 22);
             this.txtSearchNageur.TabIndex = 34;
+            this.txtSearchNageur.TextChanged += new System.EventHandler(this.txtSearchNageur_TextChanged);
             // 
             // dgvNageur
             // 
@@ -73,6 +74,7 @@ namespace TravailBDPart4
             this.btnDesinscrire.TabIndex = 36;
             this.btnDesinscrire.Text = "Desinscrire";
             this.btnDesinscrire.UseVisualStyleBackColor = true;
+            this.btnDesinscrire.Click += new System.EventHandler(this.btnDesinscrire_Click);
             // 
             // frmDesinscription
             // 
