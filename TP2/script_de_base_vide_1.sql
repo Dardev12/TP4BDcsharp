@@ -203,6 +203,33 @@ VALUES(
 	2
 )
 go
+Insert into tbl_Nageur 
+VALUES(
+	'Pav',
+	'Olic',
+	'M',
+	'pavolic@gmail.com',
+	2
+)
+go
+Insert into tbl_Nageur 
+VALUES(
+	'Walls',
+	'Miranda',
+	'F',
+	'wallsmiranda@gmail.com',
+	2
+)
+go
+Insert into tbl_Nageur 
+VALUES(
+	'Labbé',
+	'Arianne',
+	'F',
+	'labbearianne@gmail.com',
+	2
+)
+go
 
 Insert Into tbl_Resultat
 VALUES(
@@ -261,7 +288,7 @@ select * from vueNageurCompe
 where ID = 1
 go
 
-alter procedure updateView
+create procedure updateView
 @id_compe INT,
 @id_nageur INT,
 @position INT
@@ -272,3 +299,24 @@ set position = @position
 where id_nageur = @id_nageur and ID = @id_compe
 end
 go
+
+create procedure DesincriptionCompe
+@no_nageur INT
+as
+begin try
+	set nocount on
+	begin transaction
+		delete from tbl_Resultat where Id_Nageur=@no_nageur
+		/* erreur provoquée : contrainte de référence :no_cours inexistant*/
+		insert into tbl_resultat (no_cours,no_da,session) values ('420204BB','1000020','H20')
+
+	commit transaction
+end try
+begin catch
+	if @@TRANCOUNT>0
+		begin
+			rollback transaction
+			raiserror('Erreur lors de la supression',16,1)
+		end
+end catch
+

@@ -49,6 +49,35 @@ namespace TravailBDPart4
         private void Desinscrire()
         {
             //Code pour appeler et faire tout en rapport avec la stored proc
+            int Idnageur=0;
+            using (var context = new bd_natationEntities1())
+            {
+                try
+                {
+                    var reponse = context.DesincriptionCompe(Idnageur,IdCompe).FirstOrDefault();
+                    //Autre façon 
+                    //var monNageur = new System.Data.SqlClient.SqlParameter("no_nageur", Idnageur);
+                    //var test = context.Database.SqlQuery<int>(" DesincriptionCompe @no_nageur",
+                    //                        monNageur).FirstOrDefault();
+
+
+                    //========
+                    MessageBox.Show("Il y a " + reponse + " nageur désincrit à cette compétition");
+                    AfficherNageur();
+                    txtSearchNageur.Text = "";
+
+                }
+                catch (DataException ex)
+                {
+                    MessageBox.Show(ex.InnerException.Message);
+                }
+
+            }
+        }
+
+        private void frmDesinscription_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
