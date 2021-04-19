@@ -4,38 +4,37 @@
 
 
 /* PARTIE 2 */
-/* détruit la bd si elle existe */
+/* d�truit la bd si elle existe */
 use master
 go
-
 IF  EXISTS (SELECT name FROM sys.databases 
 		    WHERE name = 'bd_natation')
   drop database bd_natation
 go
-/* création de votre bd et de vos tables */
+/* cr�ation de votre bd et de vos tables */
 
 create database bd_natation
-go 
+go
 
 use bd_natation
 go
 
 CREATE TABLE tbl_Categorie_Nageur(
     ID        INT IDENTITY (1,1) NOT NULL ,
-    Age NVARCHAR(10) NOT NULL,
+    Age   NVARCHAR(10)  NOT NULL ,
     CONSTRAINT Categorie_Nageur_PK PRIMARY KEY (ID),
 	CONSTRAINT UC UNIQUE (Age)
 )
 go
 /*Table des nageurs, avec cle etrangeres vers la table des categorie*/
 CREATE TABLE tbl_Nageur(
-    ID                    INT IDENTITY (1,1) NOT NULL ,
-    Nom                   NVARCHAR (100) NULL , /* Test du champ Null qui doit être modifier en not null */
+    id_nageur                    INT IDENTITY (1,1) NOT NULL ,
+    Nom                   NVARCHAR (100) NULL , /* Test du champ Null qui doit �tre modifier en not null */
     Prenom                NVARCHAR (100) NOT NULL ,
     Genre                 NCHAR (1)  NOT NULL DEFAULT 'M',
     Adresse_Email         NVARCHAR (200) NOT NULL ,
     Id_Categorie_Nageur   INT  NULL  ,
-    CONSTRAINT Nageur_PK PRIMARY KEY (ID)
+    CONSTRAINT Nageur_PK PRIMARY KEY (id_nageur)
 )
 go
 
@@ -53,22 +52,20 @@ CREATE TABLE tbl_Competition(
     Distance             DECIMAL	NOT NULL ,
     Id_Categori_Compet   INT  NOT NULL  ,
     CONSTRAINT Competition_PK PRIMARY KEY (ID),
-	CONSTRAINT UC_cat_compe UNIQUE (Id_Categori_Compet)
 );
 go
 CREATE TABLE tbl_Resultat(
     Id_competition          INT  NOT NULL ,
     Id_Nageur   INT  NOT NULL ,
     Position    INT   NULL  ,
-    CONSTRAINT Resultat_PK PRIMARY KEY (ID_competition,Id_Nageur),
-	CONSTRAINT UC_comp UNIQUE (Id_competition)
+    CONSTRAINT Resultat_PK PRIMARY KEY (ID_competition,Id_Nageur)
 )
 go
 
 ALTER TABLE tbl_Resultat ADD 
 	CONSTRAINT [FK_resultat] FOREIGN KEY 
 	(Id_competition) REFERENCES tbl_Competition (ID) ON UPDATE CASCADE,
-	CONSTRAINT [FK_nageur] FOREIGN KEY (Id_Nageur) REFERENCES tbl_Nageur (ID) ON UPDATE CASCADE
+	CONSTRAINT [FK_nageur] FOREIGN KEY (Id_Nageur) REFERENCES tbl_Nageur (id_nageur) ON UPDATE CASCADE
 GO
 
 ALTER TABLE tbl_Competition ADD
@@ -81,9 +78,9 @@ ALTER TABLE tbl_Nageur ADD
 	(Id_Categorie_Nageur) REFERENCES tbl_Categorie_Nageur (ID) ON UPDATE CASCADE
 go
 
-/* toutes les contraintes sont définis dans le create de la table auncune contrainte après le create (dans le cas d'une table avec clé étrangère)*/
+/* toutes les contraintes sont d�finis dans le create de la table auncune contrainte apr�s le create (dans le cas d'une table avec cl� �trang�re)*/
 
-/* toutes les contraintes sont définis après la creation de la table (dans le cas d'une table avec clé étrangère)*/
+/* toutes les contraintes sont d�finis apr�s la creation de la table (dans le cas d'une table avec cl� �trang�re)*/
 
 /* contraintes */
 ALTER TABLE tbl_Nageur WITH NOCHECK 
@@ -105,29 +102,79 @@ alter column
 	Nom
 		NVARCHAR (100) NOT NULL;
 go
-/* contrainte pas 2 données pareilles */
+/* contrainte pas 2 donn�es pareilles */
 
 
 /* PARTIE 3 */
-/* insertion de données en batch à partir de LT_classe*/
+/* insertion de donn�es en batch � partir de LT_classe*/
 Insert into tbl_Categori_Compet
 VALUES(
 	'Facile'
+)
+GO
+Insert into tbl_Categori_Compet
+VALUES(
+	'Moyen'
+)
+GO
+Insert into tbl_Categori_Compet
+VALUES(
+	'Complex'
+)
+GO
+
+Insert into tbl_Categorie_Nageur
+VALUES(
+	'10-15'
+)
+GO
+Insert into tbl_Categorie_Nageur
+VALUES(
+	'15-20'
+)
+GO
+Insert into tbl_Categorie_Nageur
+VALUES(
+	'20-30'
 )
 GO
 Insert into tbl_Categorie_Nageur
 VALUES(
 	'30-35'
 )
-GO
+go
 Insert into tbl_Competition
 Values(
-	'Les Papa nageux',
-	'Cette course est destiné au Père de famille',
+	'Les Papa nageurs',
+	'Cette course est destine au Pere de famille',
 	10.2,
 	1
 )
-GO
+go
+Insert into tbl_Competition
+Values(
+	'Les maman nageuses',
+	'Cette course est destine aux mamans',
+	8.0,
+	2
+)
+go
+Insert into tbl_Competition
+Values(
+	'Les enfants nageurs',
+	'Cette course est destine aux enfants',
+	10.2,
+	3
+)
+go
+Insert into tbl_Competition
+Values(
+	'test',
+	'test',
+	10.2,
+	3
+)
+go
 
 Insert into tbl_Nageur 
 VALUES(
@@ -138,6 +185,24 @@ VALUES(
 	1
 )
 go
+Insert into tbl_Nageur 
+VALUES(
+	'lambert',
+	'darren',
+	'M',
+	'lambertdarren@gmail.com',
+	2
+)
+go
+Insert into tbl_Nageur 
+VALUES(
+	'mercier',
+	'leo',
+	'M',
+	'mercierleo@gmail.com',
+	2
+)
+go
 
 Insert Into tbl_Resultat
 VALUES(
@@ -146,7 +211,36 @@ VALUES(
 	NULL
 )
 GO
-/* insertion données spécifiques */
+Insert Into tbl_Resultat
+VALUES(
+	1,
+	2,
+	NULL
+)
+GO
+Insert Into tbl_Resultat
+VALUES(
+	1,
+	3,
+	NULL
+)
+GO
+Insert Into tbl_Resultat
+VALUES(
+	2,
+	3,
+	NULL
+)
+GO
+
+Insert Into tbl_Resultat
+VALUES(
+	3,
+	3,
+	NULL
+)
+GO
+/* insertion donn�es sp�cifiques */
 insert into tbl_Nageur(Nom, Prenom, Genre, Adresse_Email)
 select nom, prenom, sexe, nom+prenom+'@gmail.com'
 from DBelection.dbo.elec2017
@@ -154,23 +248,27 @@ where not nom='' AND NOT prenom='' AND sexe like '[M,F]'
 go
 
 /* test des contraintes */
-		
-		sp_help tbl_Nageur
-		go
-		sp_help tbl_Competition
-		go
-		sp_help tbl_Resultat
-		go
-		sp_help tbl_Categorie_Nageur
-		go
-		sp_help tbl_Categori_Compet
-		go
-
-		
-
-/* grand select pour démontrer ajouts imposés */
-select * from tbl_Competition
 select * from tbl_Nageur
-select * from tbl_Resultat
-select * from tbl_Categorie_Nageur
-select * from tbl_Categori_Compet
+go
+/* grand select pour d�montrer ajouts impos�s */
+create view vueNageurCompe
+as
+select tbl_Competition.ID ,tbl_Nageur.id_nageur ,tbl_Nageur.nom, tbl_Nageur.prenom, tbl_Resultat.position from tbl_Competition inner join tbl_Resultat on tbl_Competition.ID = tbl_Resultat.Id_competition
+inner join tbl_Nageur on tbl_Resultat.Id_Nageur = tbl_Nageur.id_nageur
+go
+
+select * from vueNageurCompe
+where ID = 1
+go
+
+alter procedure updateView
+@id_compe INT,
+@id_nageur INT,
+@position INT
+as
+begin
+update vueNageurCompe
+set position = @position
+where id_nageur = @id_nageur and ID = @id_compe
+end
+go
