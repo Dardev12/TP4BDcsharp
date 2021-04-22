@@ -306,9 +306,10 @@ as
 begin try
 	set nocount on
 	begin transaction
-		delete from tbl_Resultat where Id_Nageur=@no_nageur
+		/*delete from tbl_Resultat where Id_Nageur=@no_nageur
+		delete from tbl_Nageur where Id_Nageur=@no_nageur*/
 		/* erreur provoquée : contrainte de référence :no_cours inexistant*/
-		insert into tbl_resultat (no_cours,no_da,session) values ('420204BB','1000020','H20')
+		insert into tbl_Resultat (Id_Nageur,Id_competition,Position) values ('Bjr','AWE','H20')
 
 	commit transaction
 end try
@@ -319,4 +320,4 @@ begin catch
 			raiserror('Erreur lors de la supression',16,1)
 		end
 end catch
-
+go

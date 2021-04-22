@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity.SqlServer;
 
 namespace TravailBDPart4
 {
@@ -48,28 +49,48 @@ namespace TravailBDPart4
 
         private void Desinscrire()
         {
-            //Code pour appeler et faire tout en rapport avec la stored proc
-            int Idnageur=0;
+            
             using (var context = new bd_natationEntities1())
             {
-                try
+                if (dgvNageur.CurrentCell.Value != null)
                 {
-                    var reponse = context.DesincriptionCompe(Idnageur,IdCompe).FirstOrDefault();
-                    //Autre façon 
-                    //var monNageur = new System.Data.SqlClient.SqlParameter("no_nageur", Idnageur);
-                    //var test = context.Database.SqlQuery<int>(" DesincriptionCompe @no_nageur",
-                    //                        monNageur).FirstOrDefault();
+                    int rowindex = dgvNageur.CurrentCell.RowIndex;
+                    int columnindex = dgvNageur.CurrentCell.ColumnIndex;
+                    string nageur = dgvNageur.Rows[rowindex].Cells[columnindex].Value.ToString();
+                    try
+                    {
+
+                        //Code pour appeler et faire tout en rapport avec la stored proc
+                        int Idnageur = int.Parse(nageur);
 
 
-                    //========
-                    MessageBox.Show("Il y a " + reponse + " nageur désincrit à cette compétition");
-                    AfficherNageur();
-                    txtSearchNageur.Text = "";
 
+                        DialogResult dialogResult = MessageBox.Show("Voulez vous supprimer ce nageur", "Désincription", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            //do something
+                            var reponse = context.DesincriptionCompe(Idnageur);
+                            MessageBox.Show("Il y a " + reponse + " nageur désincrit à cette compétition");
+
+                            AfficherNageur();
+
+                            txtSearchNageur.Text = "";
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            //do something else
+                            MessageBox.Show("Annulation effectué");
+                        }
+
+                    }
+                    catch (DataException ex)
+                    {
+                        MessageBox.Show(ex.InnerException.Message);
+                    }
                 }
-                catch (DataException ex)
+                else
                 {
-                    MessageBox.Show(ex.InnerException.Message);
+                    MessageBox.Show("Veuillez selectionner un nageur dans le tableau!");
                 }
 
             }

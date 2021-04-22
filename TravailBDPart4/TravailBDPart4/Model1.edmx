@@ -112,6 +112,9 @@ avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de cl√
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DesincriptionCompe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="no_nageur" Type="int" Mode="In" />
+        </Function>
         <Function Name="updateView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_compe" Type="int" Mode="In" />
           <Parameter Name="id_nageur" Type="int" Mode="In" />
@@ -294,6 +297,9 @@ avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de cl√
             <Parameter Name="id_nageur" Mode="In" Type="Int32" />
             <Parameter Name="position" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="DesincriptionCompe">
+            <Parameter Name="no_nageur" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -370,6 +376,7 @@ avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de cl√
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="updateView" FunctionName="bd_natationModel.Store.updateView" />
+          <FunctionImportMapping FunctionImportName="DesincriptionCompe" FunctionName="bd_natationModel.Store.DesincriptionCompe" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

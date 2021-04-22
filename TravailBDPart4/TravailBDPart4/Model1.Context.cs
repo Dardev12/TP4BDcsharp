@@ -50,5 +50,14 @@ namespace TravailBDPart4
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateView", id_compeParameter, id_nageurParameter, positionParameter);
         }
+    
+        public virtual int DesincriptionCompe(Nullable<int> no_nageur)
+        {
+            var no_nageurParameter = no_nageur.HasValue ?
+                new ObjectParameter("no_nageur", no_nageur) :
+                new ObjectParameter("no_nageur", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DesincriptionCompe", no_nageurParameter);
+        }
     }
 }
