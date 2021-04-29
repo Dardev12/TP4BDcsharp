@@ -321,3 +321,19 @@ begin catch
 		end
 end catch
 go
+
+create trigger trigger_gestion_nombre_maximum
+on tbl_Resultat
+for insert
+AS
+begin
+	IF (SELECT Id_competition, count(*)[Nombre nageurs] FROM tbl_Resultat group by Id_competition) >= 5
+	begin
+		rollback;
+		THROW 51000,'Cette competition est complete',16;
+	end
+end
+
+
+select * from tbl_Resultat
+go
