@@ -25,6 +25,7 @@ namespace TravailBDPart4
         public string Description { get; set; }
         public decimal Distance { get; set; }
         public int Id_Categori_Compet { get; set; }
+        public byte[] versionHolder { get; set; }
     
         public virtual tbl_Categori_Compet tbl_Categori_Compet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

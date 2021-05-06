@@ -52,5 +52,10 @@ namespace TravailBDPart4
         {
             showForm(new frmDesinscription());
         }
+
+        private void modifCompetitionConcurenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showForm(new ModifCompetitionConcurence());
+        }
     }
 }

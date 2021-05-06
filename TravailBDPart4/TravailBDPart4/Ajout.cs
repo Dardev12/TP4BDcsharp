@@ -78,7 +78,6 @@ namespace TravailBDPart4
                 cbCat.ValueMember = "ID";
                 cbCat.DataSource = context.tbl_Categorie_Nageur.ToList();
             }
-            
         }
 
         private void btnAjout_Click(object sender, EventArgs e)

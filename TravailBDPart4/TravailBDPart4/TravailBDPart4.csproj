@@ -103,6 +103,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ModifCompetitionConcurence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifCompetitionConcurence.Designer.cs">
+      <DependentUpon>ModifCompetitionConcurence.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModificationDestruction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDesinscription.resx">
       <DependentUpon>frmDesinscription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifCompetitionConcurence.resx">
+      <DependentUpon>ModifCompetitionConcurence.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModificationDestruction.resx">
       <DependentUpon>ModificationDestruction.cs</DependentUpon>

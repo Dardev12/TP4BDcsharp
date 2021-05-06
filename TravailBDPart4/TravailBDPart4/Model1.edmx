@@ -28,6 +28,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Distance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Id_Categori_Compet" Type="int" Nullable="false" />
+          <Property Name="versionHolder" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_Nageur">
           <Key>
@@ -183,6 +184,7 @@ avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de cl√
           <Property Name="Id_Categori_Compet" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_Categori_Compet" Relationship="Self.FK_categori_competition" FromRole="tbl_Competition" ToRole="tbl_Categori_Compet" />
           <NavigationProperty Name="tbl_Resultat" Relationship="Self.FK_resultat" FromRole="tbl_Competition" ToRole="tbl_Resultat" />
+          <Property Name="versionHolder" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
         </EntityType>
         <EntityType Name="tbl_Nageur">
           <Key>
@@ -298,7 +300,7 @@ avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de cl√
             <Parameter Name="position" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DesincriptionCompe">
-            <Parameter Name="no_nageur" Mode="In" Type="Int32" />
+          <Parameter Name="no_nageur" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -326,6 +328,7 @@ avertissement 6002: La table/vue 'bd_natation.dbo.vueNageurCompe' n'a pas de cl√
           <EntitySetMapping Name="tbl_Competition">
             <EntityTypeMapping TypeName="bd_natationModel.tbl_Competition">
               <MappingFragment StoreEntitySet="tbl_Competition">
+                <ScalarProperty Name="versionHolder" ColumnName="versionHolder" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
