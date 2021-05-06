@@ -327,13 +327,29 @@ on tbl_Resultat
 for insert
 AS
 begin
-	IF (SELECT Id_competition, count(*)[Nombre nageurs] FROM tbl_Resultat group by Id_competition) >= 5
+	IF EXISTS (SELECT tbl_Resultat.Id_competition, count(*) Nombre_nageurs
+FROM tbl_Resultat inner join inserted i on tbl_Resultat.Id_competition = i.Id_competition
+group by tbl_Resultat.Id_competition
+having count(*) >5)
 	begin
 		rollback;
 		THROW 51000,'Cette competition est complete',16;
 	end
 end
-
-
-select * from tbl_Resultat
 go
+
+--Ajout unitaire fonctionnel
+insert into tbl_Resultat(Id_competition, Id_Nageur)
+VALUES(4 , 12)
+go
+--Ajout unitaire non fonctionnel
+insert into tbl_Resultat(Id_competition, Id_Nageur)
+VALUES(1 , 14)
+go
+
+ALTER TABLE tbl_Competition
+  add versionHolder timestamp
+  go
+
+--Test unitaire DE L'AJOUT
+select * from tbl_Competition
