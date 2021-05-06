@@ -107,6 +107,14 @@ go
 
 /* PARTIE 3 */
 /* insertion de donn�es en batch � partir de LT_classe*/
+
+/* insertion donn�es sp�cifiques */
+insert into tbl_Nageur(Nom, Prenom, Genre, Adresse_Email)
+select nom, prenom, sexe, nom+prenom+'@gmail.com'
+from DBelection.dbo.elec2017
+where not nom='' AND NOT prenom='' AND sexe like '[M,F]'
+go
+
 Insert into tbl_Categori_Compet
 VALUES(
 	'Facile'
@@ -254,6 +262,20 @@ VALUES(
 GO
 Insert Into tbl_Resultat
 VALUES(
+	1,
+	22,
+	NULL
+)
+GO
+Insert Into tbl_Resultat
+VALUES(
+	1,
+	52,
+	NULL
+)
+GO
+Insert Into tbl_Resultat
+VALUES(
 	2,
 	3,
 	NULL
@@ -267,12 +289,6 @@ VALUES(
 	NULL
 )
 GO
-/* insertion donn�es sp�cifiques */
-insert into tbl_Nageur(Nom, Prenom, Genre, Adresse_Email)
-select nom, prenom, sexe, nom+prenom+'@gmail.com'
-from DBelection.dbo.elec2017
-where not nom='' AND NOT prenom='' AND sexe like '[M,F]'
-go
 
 /* test des contraintes */
 select * from tbl_Nageur
@@ -340,11 +356,11 @@ go
 
 --Ajout unitaire fonctionnel
 insert into tbl_Resultat(Id_competition, Id_Nageur)
-VALUES(4 , 12)
+VALUES(4 , 15)
 go
 --Ajout unitaire non fonctionnel
 insert into tbl_Resultat(Id_competition, Id_Nageur)
-VALUES(1 , 14)
+VALUES(1 , 16)
 go
 
 ALTER TABLE tbl_Competition
@@ -353,3 +369,4 @@ ALTER TABLE tbl_Competition
 
 --Test unitaire DE L'AJOUT
 select * from tbl_Competition
+go
